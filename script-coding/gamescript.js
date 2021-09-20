@@ -296,6 +296,7 @@ function setup() {
     retrasoComodines: 80,
     scoreMas: 1,
     activosMiniEnemigos: false,
+    imagenActual: cabeza_derecha_normal
   };
 }
 
@@ -350,53 +351,13 @@ function compruebaTablero(){
     forEach(Mundo.snake, (s) => {
       x = lookupx(Mundo.snake, s);
       if (Mundo.dir == derecha) {
-        image(
-          cabeza_derecha_normal,
-          Mundo.snake[x].x * 20,
-          Mundo.snake[x].y * 20,
-          lado,
-          lado,
-          0,
-          0,
-          20,
-          20
-        );
+        update(Mundo,Mundo.imagenActual = cabeza_derecha_normal)
       } else if (Mundo.dir == izquierda) {
-        image(
-          cabeza_izquierda_normal,
-          Mundo.snake[x].x * 20,
-          Mundo.snake[x].y * 20,
-          lado,
-          lado,
-          0,
-          0,
-          20,
-          20
-        );
+        update(Mundo,Mundo.imagenActual = cabeza_izquierda_normal)
       } else if (Mundo.dir == arriba) {
-        image(
-          cabeza_arriba_normal,
-          Mundo.snake[x].x * 20,
-          Mundo.snake[x].y * 20,
-          lado,
-          lado,
-          0,
-          0,
-          20,
-          20
-        );
+        update(Mundo,Mundo.imagenActual = cabeza_arriba_normal)
       } else if (Mundo.dir == abajo) {
-        image(
-          cabeza_abajo_normal,
-          Mundo.snake[x].x * 20,
-          Mundo.snake[x].y * 20,
-          lado,
-          lado,
-          0,
-          0,
-          20,
-          20
-        );
+        update(Mundo,Mundo.imagenActual = cabeza_abajo_normal)
       } else {
         return null;
       }
@@ -436,15 +397,37 @@ function drawGame(Mundo) {
   stroke(10, 10, 10);
   //StrokeWeight => Define el ancho
   strokeWeight(4);
+  // forEach(Mundo.snake, (s) => {
+  //   rect(
+  //       constrain(s.x,1,columnas-2) * lado,
+  //       constrain(s.y,4,filas-2 )* lado,
+  //     lado,
+  //     lado
+  //     );
+  // });
+  // forEach(Mundo.snake, (s) => {
+  //   rect(
+  //       constrain(s.x,1,columnas-2) * lado,
+  //       constrain(s.y,4,filas-2 )* lado,
+  //     lado,
+  //     lado
+  //     );
+  // });
   forEach(Mundo.snake, (s) => {
-    rect(
-        constrain(s.x,1,columnas-2) * lado,
-        constrain(s.y,4,filas-2 )* lado,
+    x = lookupx(Mundo.snake, s);
+    image(
+      Mundo.imagenActual,
+      Mundo.snake[x].x * 20,
+      Mundo.snake[x].y * 20,
       lado,
-      lado
-      );
+      lado,
+      0,
+      0,
+      20,
+      20
+    );
   });
-  dibujaImagen();
+  // dibujaImagen();
   //Dibuja la comida en una posicion random
   drawFood(Mundo.food);
   //Esta funcion dibuja al snake
@@ -523,6 +506,7 @@ function cambioTablero() {
 //OnTic: Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones. La velocidad de ejecución del onTic depende del frameRate.
 function onTic(Mundo) {
   // console.log(Mundo.dir)
+  dibujaImagen()
   // dibujaImagen()
   //Tablero
   cambioTablero();
