@@ -1,4 +1,4 @@
-//Libreria
+//Cambio xd
 let {
   append,
   cons,
@@ -20,7 +20,7 @@ function update(data, attribute) {
 let Mundo = {};
 ////////////////////////
 
-// Constantes para las escalas del canvas
+// Constantes para las escalas
 const columnas = 28;
 const filas = 26;
 const lado = 20;
@@ -28,24 +28,40 @@ const ancho_canvas = columnas * lado;
 const alto_canvas = filas * lado;
 let canvas;
 
-//Medidas Actuales
 // ANCHO: 560
 // ALTO: 520
 
-// Constantes de Control
+// Variables de Control
 let arriba;
 let abajo;
 let derecha;
 let izquierda;
 
-// Constante de Juego
- //--> El puntaje del personaje
-let score ;
-//-->Contador de Vidas
-let countLives = 3 ;
-//-->Imagen de Fondo del Canvas
-let fondo;
+//Imagen de Canvas
+let fondo ;
 
+// Constante de Juego
+let score ;
+let countLives = 3 ;
+
+/**
+ * Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola
+ */
+function moveSnake(snake, dir) {
+  const head = first(snake);
+  return cons(
+    { x: head.x + dir.x, y: head.y + dir.y },
+    snake.slice(0, length(snake) - 1)
+  );
+}
+
+/**
+ * Dibuja la comida#671796
+ */
+function drawFood(food) {
+  fill("crimson");
+  rect(food.x * lado, food.y * lado, lado, lado);
+}
 
 /**
  * Esto se llama antes de iniciar el juego
@@ -74,38 +90,6 @@ function setup() {
     lives: 3,
     tipe : "juego"
   };
-}
-
-// Dibuja algo en el canvas. Aqui se pone todo lo que quieras pintar
-function drawGame(Mundo) {
-  background(fondo);
-  drawUi();
-  fill(240, 240, 240);
-  stroke(10,10,10);
-	strokeWeight(4);
-  drawFood(Mundo.food);
-  forEach(Mundo.snake, (s) => {
-    rect(s.x * lado, s.y * lado, lado, lado);
-  });
-}
-
-/*
- * Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola *
- */
-function moveSnake(snake, dir) {
-  const head = first(snake);
-  return cons(
-    { x: head.x + dir.x, y: head.y + dir.y },
-    snake.slice(0, length(snake) - 1)
-  );
-}
-
-/**
- * Dibuja la comida #671796
- */
-function drawFood(food) {
-  fill("crimson");
-  rect(food.x * lado, food.y * lado, lado, lado);
 }
 
 // Funcion del Fondo
@@ -138,6 +122,19 @@ function windowRezired() {
   canvas.style("height", height * escala + "px");
 }
 
+// Dibuja algo en el canvas. Aqui se pone todo lo que quieras pintar
+function drawGame(Mundo) {
+  background(fondo);
+  drawUi();
+  fill(240, 240, 240);
+  stroke(10,10,10);
+	strokeWeight(4);
+  drawFood(Mundo.food);
+  forEach(Mundo.snake, (s) => {
+    rect(s.x * lado, s.y * lado, lado, lado);
+  });
+}
+
 // Funcion para dibujar lo que esta arriba del canvas, el puntaje.
 function drawUi(){
   fill(255,255,255);
@@ -149,6 +146,7 @@ function drawUi(){
   textAlign(RIGHT)
   text("LIVES: " + countLives,540,45)
 }
+
 
 // Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones
 function onTic(Mundo) {
@@ -181,7 +179,7 @@ function onTic(Mundo) {
     tipe : "juego"
   };
     return Mundo;
-  } else if (
+  } if (
 		Mundo.snake[0].x > columnas - 1 ||
 		Mundo.snake[0].y > filas - 1 ||
 		Mundo.snake[0].x < 0 ||
@@ -204,10 +202,10 @@ function onTic(Mundo) {
 			Mundo.snake.push({ x: 5, y: 5 });
 			return update(Mundo, {
 				snake: moveSnake(Mundo.snake, Mundo.dir),
-          food: {
-            x: Math.floor(Math.random() * (20 - 0) + 0),
-            y: Math.floor(Math.random() * (20 - 0) + 0),
-          },
+				food: {
+					x: Math.floor(Math.random() * (20 - 0) + 0),
+					y: Math.floor(Math.random() * (20 - 0) + 0),
+				},
 				score: Mundo.score + 1,
 			});
 		} else {
@@ -244,13 +242,13 @@ function keyPressed() {
         break;
       }
       if ((Mundo.dir = derecha));
-      brek;
+      break;
     case DOWN_ARROW:
       if (Mundo.dir == arriba) {
         break;
       }
       if ((Mundo.dir = abajo));
-      brek;
+      break;
     case LEFT_ARROW:
       if (Mundo.dir == derecha) {
         break;
@@ -263,7 +261,6 @@ function keyPressed() {
 function onKeyEvent(Mundo, keyCode) {
   return update(Mundo, { dir: keyDirection(Mundo.dir, keyCode), moved: 0 });
 }
-
 
 /*
 Propósito: Retornar si la cabeza del Snake tiene la misma posición de uno de las posiciones de su cuerpo
@@ -286,4 +283,3 @@ function choqueSnake(snake, cabezaSnake) {
     return choqueSnake(rest(snake), cabezaSnake);
   }
 }
-
