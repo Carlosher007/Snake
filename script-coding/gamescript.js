@@ -245,15 +245,15 @@ function setup() {
       { x: columnas / 2 - 2, y: filas / 2 },
     ],
     //Escenario
-    escenario : escenario1,
+    escenario: escenario1,
     //Direccion por la que empieza el Snake
     dir: derecha,
     //Enermigos
     listaEnemigos,
     //Posicion de la Comida (Será Random)
     food: {
-      x: int(getRandom(2,26)) ,  //28
-      y: int(getRandom(4,25)), //26
+      x: int(getRandom(2, 26)), //28
+      y: int(getRandom(4, 25)), //26
     },
     // cuadradoFinal: {
     //   x: 0,
@@ -284,12 +284,7 @@ function setup() {
       comodinAleatorio,
     ],
 
-    comidas: [
-      pegante,
-      moradito,
-      chontaduro,
-      cocaCola,
-    ],
+    comidas: [pegante, moradito, chontaduro, cocaCola],
 
     //Numero de vidas inicial
     lives: 3,
@@ -308,24 +303,74 @@ function setup() {
       {
         x: 18,
         y: 10,
-        pos:false,
+        pos: false,
       },
     ],
-    start:true,
+    barrage: [
+      { x: 26, y: 4, dirx: true, },
+      { x: 26, y: 5, dirx: true, },
+      { x: 26, y: 6, dirx: true, },
+      { x: 26, y: 7, dirx: true, },
+      { x: 26, y: 8, dirx: true, },
+      { x: 26, y: 9, dirx: true, },
+      { x: 26, y: 10, dirx: true, },
+      { x: 26, y: 11, dirx: true, },
+      { x: 26, y: 12, dirx: true, },
+      { x: 26, y: 13, dirx: true, },
+      { x: 26, y: 14, dirx: true, },
+      { x: 26, y: 15, dirx: true, },
+      { x: 26, y: 16, dirx: true, },
+      { x: 26, y: 17, dirx: true, },
+      { x: 26, y: 18, dirx: true, },
+      { x: 26, y: 19, dirx: true, },
+      { x: 26, y: 20, dirx: true, },
+      { x: 26, y: 21, dirx: true, },
+      { x: 26, y: 22, dirx: true, },
+      { x: 26, y: 23, dirx: true, },
+      { x: 26, y: 24, dirx: true, },
+    ],
+    barragev: [
+      { x: 1, y: 4, diry: true },
+      { x: 2, y: 4, diry: true },
+      { x: 3, y: 4, diry: true },
+      { x: 4, y: 4, diry: true },
+      { x: 5, y: 4, diry: true },
+      { x: 6, y: 4, diry: true },
+      { x: 7, y: 4, diry: true },
+      { x: 8, y: 4, diry: true },
+      { x: 9, y: 4, diry: true },
+      { x: 10, y: 4, diry: true },
+      { x: 11, y: 4, diry: true },
+      { x: 12, y: 4, diry: true },
+      { x: 13, y: 4, diry: true },
+      { x: 14, y: 4, diry: true },
+      { x: 15, y: 4, diry: true },
+      { x: 16, y: 4, diry: true },
+      { x: 17, y: 4, diry: true },
+      { x: 18, y: 4, diry: true },
+      { x: 19, y: 4, diry: true },
+      { x: 20, y: 4, diry: true },
+      { x: 21, y: 4, diry: true },
+      { x: 22, y: 4, diry: true },
+      { x: 23, y: 4, diry: true },
+      { x: 24, y: 4, diry: true },
+      { x: 25, y: 4, diry: true },
+      { x: 26, y: 4, diry: true },
+    ],
+    start: true,
     retrasoComodines: 80,
     retrasoComidas: 50,
     scoreMas: 1,
     activosMiniEnemigos: false,
     imagenActualCabeza: cabeza_derecha_normal,
-    imagenActualCola : cola_normal,
-    retrasoCola:3,
+    imagenActualCola: cola_normal,
+    retrasoCola: 3,
     contadorCola: 3,
     normalActivo: true,
     vendedorActivo: false,
-    neroActivo:false,
+    neroActivo: false,
     policiaActivo: false,
-    politicoActivo:false,
-
+    politicoActivo: false,
   };
 
 }
@@ -361,6 +406,8 @@ function drawGame(Mundo) {
   //Enemigos
   // dibujaEnemigo(Mundo.listaEnemigos)
 
+  drawBarrage(Mundo.barrage);
+  drawNewBarrage(Mundo.barragev);
 
   //Stroke => color de los bordes
 
@@ -916,16 +963,55 @@ function onTic(Mundo) {
         } else {
 
         } */
+      } else if (hitHeadB(Mundo.snake, Mundo.barrage)) {
+        countLives = Mundo.lives - 1;
+        return update(Mundo, {
+          snake: [
+            { x: columnas / 2, y: filas / 2 },
+            { x: columnas / 2 - 1, y: filas / 2 },
+            { x: columnas / 2 - 2, y: filas / 2 },
+          ],
+          dir: derecha,
+          food: {
+            x: int(getRandom(2, 26)), //28
+            y: int(getRandom(4, 25)),
+          },
+          // cuadradoFinal: {
+          //   x: 0,
+          //   y: 0,
+          // },
+          score: Mundo.score,
+          lives: Mundo.lives - 1,
+          tipe: "juego",
+          timer: int(millis() / 1000),
+          Thief: {
+            x: 26,
+            y: 13,
+            dirx: true,
+            diry: true,
+          },
+          knife: [
+            {
+              x: 18,
+              y: 10,
+              pos: false,
+            },
+          ],
+        });
+
+        /* } else if (hitBodyB(Mundo.barragev)) {
+        return update(Mundo, {
+          score: Mundo.score - 1,
+        }); */
       } else if (knifeOut(Mundo.knife)) {
-        update(Mundo, Mundo.knife = moveKnife(Mundo.knife));
+        update(Mundo, (Mundo.knife = moveKnife(Mundo.knife)));
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
           Thief: ThiefMove(Mundo.Thief),
           knife: despawnKnife(Mundo.knife),
           timer: int(millis() / 1000),
         });
-
-      }   else {
+      } else {
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
           Thief: ThiefMove(Mundo.Thief),
@@ -953,6 +1039,7 @@ function onTic(Mundo) {
           score: Mundo.score + Mundo.scoreMas,
           timer: int(millis() / 1000),
           start: false,
+          
         });
         //Comprueba si el tiempoActivo de velocidad es diferente de cero para restarle
         //Movimiento normal del Snake junto al del Thief.
@@ -960,6 +1047,8 @@ function onTic(Mundo) {
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
           timer: int(millis() / 1000),
+          barrage: moveBarrage(Mundo.barrage),
+          barragev: moveBarragev(Mundo.barragev),
           // cuadradoFinal: {
           // 	x: Mundo.snake[Mundo.snake.length - 1].x,
           // 	y: Mundo.snake[Mundo.snake.length - 1].y,
