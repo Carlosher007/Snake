@@ -78,6 +78,57 @@ function juegoNuevo() {
         pos:false,
       },
     ],
+    barrage: [
+      { x: 26, y: 4, dirx: true, },
+      { x: 26, y: 5, dirx: true, },
+      { x: 26, y: 6, dirx: true, },
+      { x: 26, y: 7, dirx: true, },
+      { x: 26, y: 8, dirx: true, },
+      { x: 26, y: 9, dirx: true, },
+      { x: 26, y: 10, dirx: true, },
+      { x: 26, y: 11, dirx: true, },
+      { x: 26, y: 12, dirx: true, },
+      { x: 26, y: 13, dirx: true, },
+      { x: 26, y: 14, dirx: true, },
+      { x: 26, y: 15, dirx: true, },
+      { x: 26, y: 16, dirx: true, },
+      { x: 26, y: 17, dirx: true, },
+      { x: 26, y: 18, dirx: true, },
+      { x: 26, y: 19, dirx: true, },
+      { x: 26, y: 20, dirx: true, },
+      { x: 26, y: 21, dirx: true, },
+      { x: 26, y: 22, dirx: true, },
+      { x: 26, y: 23, dirx: true, },
+      { x: 26, y: 24, dirx: true, },
+    ],
+    barragev: [
+      { x: 1, y: 4, diry: true },
+      { x: 2, y: 4, diry: true },
+      { x: 3, y: 4, diry: true },
+      { x: 4, y: 4, diry: true },
+      { x: 5, y: 4, diry: true },
+      { x: 6, y: 4, diry: true },
+      { x: 7, y: 4, diry: true },
+      { x: 8, y: 4, diry: true },
+      { x: 9, y: 4, diry: true },
+      { x: 10, y: 4, diry: true },
+      { x: 11, y: 4, diry: true },
+      { x: 12, y: 4, diry: true },
+      { x: 13, y: 4, diry: true },
+      { x: 14, y: 4, diry: true },
+      { x: 15, y: 4, diry: true },
+      { x: 16, y: 4, diry: true },
+      { x: 17, y: 4, diry: true },
+      { x: 18, y: 4, diry: true },
+      { x: 19, y: 4, diry: true },
+      { x: 20, y: 4, diry: true },
+      { x: 21, y: 4, diry: true },
+      { x: 22, y: 4, diry: true },
+      { x: 23, y: 4, diry: true },
+      { x: 24, y: 4, diry: true },
+      { x: 25, y: 4, diry: true },
+      { x: 26, y: 4, diry: true },
+    ],
     start:true,
     retrasoComodines: 80,
     retrasoComidas: 80,
@@ -109,7 +160,7 @@ Propósito: Parar la música dependiendo del escenario actual en que se encuentr
 Prototipo: paraMusica(){}
 */
 function paraMusica() {
-  if (Mundo.escenario == escenario1) {
+  /* if (Mundo.escenario == escenario1) {
     mortalKombat.stop();
   } else if (Mundo.escenario == escenario2) {
     music.stop();
@@ -117,7 +168,7 @@ function paraMusica() {
     music2.stop();
   } else if (Mundo.escenario == escenario5) {
     spider.stop();
-  }
+  } */
 }
 
 /*
