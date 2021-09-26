@@ -1,6 +1,6 @@
 
-/**Funcion que se encarga de dibujar a Barrage 
- * 
+/**Funcion que se encarga de dibujar a Barrage
+ *
 */
 function drawBarrage(barrage) {
   forEach(barrage, (b) => {
@@ -9,14 +9,14 @@ function drawBarrage(barrage) {
   });
 }
 
-/**Funcion que se encarga de mover a Barrage 
- * 
+/**Funcion que se encarga de mover a Barrage
+ *
 */
 function moveBarrage(data) {
   const head = first(data)
   if (isEmpty(data)) {
     return []
-  } else 
+  } else
   if (head.x==20 && head.dirx==true) {
     if (isEmpty(data)) {
       return [];
@@ -59,8 +59,8 @@ function moveBarrage(data) {
       }
     }
   }
-    
-  
+
+
 
 
 
@@ -79,7 +79,7 @@ function moveBarragev(data) {
   const head = first(data)
   if (isEmpty(data)) {
     return []
-  } else 
+  } else
   if (head.y==10 && head.diry==true) {
     if (isEmpty(data)) {
       return [];
@@ -132,20 +132,34 @@ function drawNewBarrage(barrage) {
 }
 
 
-/* function hitBodyB(lista) {
-  forEach(lista, (element) => {
+//  function hitBodyB(lista) {
+//   forEach(lista, (element) => {
+//     forEach(Mundo.snake, (elementD) => {
+//       x = lookupx(Mundo.snake, elementD);
+//       if (
+//         element.x == elementD.x &&
+//         element.y == elementD.y
+//       ) {
+//         update(Mundo, (Mundo.score = Mundo.score - 1));
+//       }
+//     });
+//   });
+// }
+
+
+function hitHeatB2(list){
+    forEach(list, (element) => {
     forEach(Mundo.snake, (elementD) => {
       x = lookupx(Mundo.snake, elementD);
-      if (
-        element.x == elementD.x &&
-        element.y == elementD.y 
-      ) {
-        update(Mundo, (Mundo.score = Mundo.score - 1));
+      if (element.x == elementD.x && element.y == elementD.y && x==0) {
+        update(Mundo, (Mundo.lives = Mundo.lives - 1));
+        juegoTerminado();
       }
     });
   });
 }
- */
+
+
 function hitHeadB(snake, knife) {
   const head = first(knife);
   if (isEmpty(knife)) {

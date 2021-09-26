@@ -632,8 +632,11 @@ function cambioTablero() {
 /* ONTIC */
 //OnTic: Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones. La velocidad de ejecución del onTic depende del frameRate.
 function onTic(Mundo) {
+
+  hitHeatB2(Mundo.barrage);
+  hitHeatB2(Mundo.barragev);
   // console.log(Mundo.dir)
-  cambiaCabezaCola()
+  cambiaCabezaCola();
   // cambiaCola()
   //Tablero
   cambioTablero();
@@ -1039,7 +1042,7 @@ function onTic(Mundo) {
           score: Mundo.score + Mundo.scoreMas,
           timer: int(millis() / 1000),
           start: false,
-          
+
         });
         //Comprueba si el tiempoActivo de velocidad es diferente de cero para restarle
         //Movimiento normal del Snake junto al del Thief.

@@ -163,9 +163,9 @@ function paraMusica() {
   /* if (Mundo.escenario == escenario1) {
     mortalKombat.stop();
   } else if (Mundo.escenario == escenario2) {
-    music.stop();
+    // music.stop();
   } else if (Mundo.escenario == escenario3) {
-    music2.stop();
+    // music2.stop();
   } else if (Mundo.escenario == escenario5) {
     spider.stop();
   } */
@@ -207,7 +207,7 @@ function juegoTerminado() {
 /*
 Contrato: snake,dir => function() ( Recibe una snake y la direccion de esta para retornarme una funcion de cons() )
 Propósito: Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola.
-  Me guarda en una constante la cabeza del snake y me hace un 
+  Me guarda en una constante la cabeza del snake y me hace un
 Prototipo: moveSnake(snake,dir)
 */
 function moveSnake(snake, dir) {
